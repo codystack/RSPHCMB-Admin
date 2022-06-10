@@ -25,46 +25,21 @@ import Dashboard from "./presentation/pages/dashboard";
 
 function App() {
   const dispatch = useDispatch();
-  // const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     try {
       const user = auth.currentUser;
       if (user) {
         onSnapshot(doc(db, "users", "" + user.uid), (doc) => {
-          // userData(doc.data());
-          //dispatch(setMyData(doc.data()));
           dispatch(setUserID(user?.uid));
-          // console.log("ARGTE::", doc.data());
-          // setUser(doc.data());
         });
       }
-
-      // auth().onAuthStateChanged((user) => {
-      //   if (user) {
-      //     onSnapshot(doc(db, "users", "" + user.uid), (doc) => {
-      //       dispatch(setUserData(doc.data()));
-      //     });
-      //   } else {
-      //     dispatch(setUserData(null));
-      //   }
-      // });
     } catch (err) {
       // console.log(err);
     }
-    // return () => {};
   }, [dispatch]);
 
   React.useEffect(() => {
-    // const q = query(collection(db, "faqs"));
-    // onSnapshot(q, (querySnapshot) => {
-    //   const faqs = [];
-    //   querySnapshot.forEach((doc) => {
-    //     faqs.push(doc.data());
-    //   });
-    //   dispatch(setFAQs(faqs));
-    // });
-
     const teamQuery = query(collection(db, "team-members"));
     onSnapshot(teamQuery, (querySnapshot) => {
       const teams = [];
